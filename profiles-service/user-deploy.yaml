@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-profile
+  labels:
+    app: user-profile
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-profile
+  template:
+    metadata:
+      labels:
+        app: user-profile
+    spec:
+      containers:
+      - name: user-profile
+        image: shym/user-profile:latest
+        readinessProbe:
+          httpGet:
+            path: /profiles/health
+            port: 8091
+          initialDelaySeconds: 120
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /profiles/liveness
+            port: 8091
+          initialDelaySeconds: 130
+          timeoutSeconds: 10
+          failureThreshold: 10
+        ports:
+        - containerPort: 8091

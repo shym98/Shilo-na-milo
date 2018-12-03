@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.17.0 (a74acad)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: postgre-crypto
+  name: postgre-crypto
+spec:
+  ports:
+  - name: "5433"
+    port: 5433
+    targetPort: 5433
+  selector:
+    io.kompose.service: postgre-crypto
+status:
+  loadBalancer: {}

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo
+  labels:
+    app: mongo
+    visualize: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo
+      version: "latest"
+  template:
+    metadata:
+      labels:
+        app: mongo
+        version: "latest"
+        visualize: "true"
+    spec:
+      containers:
+      - name: mongo
+        image: mongo:latest
+        livenessProbe:
+          tcpSocket:
+            port: 27017
+        env:
+        - name: MONGO_INITDB_ROOT_USERNAME
+          value: shilo_admin
+        - name: MONGO_INITDB_ROOT_PASSWORD
+          value: shilomiloshilomiloshilomilo
+        - name: MONGO_INITDB_DATABASE
+          value: admin
+        ports:
+        - containerPort: 27017
+          name: mongo
+        volumeMounts:
+          # name must match the volume name below
+        - name: mongo-persistent-storage
+          # mount path within the container
+          mountPath: /var/lib/mongo
+      volumes:
+      - name: mongo-persistent-storage
+        persistentVolumeClaim:
+          claimName: mongo-pvc

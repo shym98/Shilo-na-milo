@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgre-crypto
+  labels:
+    app: postgre-crypto
+    visualize: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgre-crypto
+      version: "latest"
+  template:
+    metadata:
+      labels:
+        app: postgre-crypto
+        version: "latest"
+        visualize: "true"
+    spec:
+      containers:
+      - name: postgre-crypto
+        image: shym/postgre-crypto:latest
+        livenessProbe:
+          tcpSocket:
+            port: 5432
+        ports:
+        - containerPort: 5433
+          name: postgre-crypto
+        volumeMounts:
+          # name must match the volume name below
+        - name: postgre-persistent-storage
+          # mount path within the container
+          mountPath: /var/lib/postgre
+      volumes:
+      - name: postgre-persistent-storage
+        persistentVolumeClaim:
+          claimName: postgre-crypto-pvc

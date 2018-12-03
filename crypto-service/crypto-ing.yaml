@@ -1,0 +1,8 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: crypto-ingress
+spec:
+  backend:
+    serviceName: crypto
+    servicePort: 8093

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: postgre-crypto
+  labels:
+    app: postgre-crypto
+    visualize: "true"
+spec: 
+  ports:
+    # the port that this service should serve on
+    - port: 5433
+      name: postgre-crypto
+  # label keys and values that must match in order to receive traffic for this service
+  selector: 
+    app: postgre-crypto

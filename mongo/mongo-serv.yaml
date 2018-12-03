@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata: 
+  name: mongo
+  labels:
+    app: mongo
+    visualize: "true"
+spec: 
+  ports:
+    # the port that this service should serve on
+    - port: 27017
+      name: mongo
+  # label keys and values that must match in order to receive traffic for this service
+  selector: 
+    app: mongo

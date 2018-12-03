@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgre
+  labels:
+    app: postgre
+    visualize: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgre
+      version: "latest"
+  template:
+    metadata:
+      labels:
+        app: postgre
+        version: "latest"
+        visualize: "true"
+    spec:
+      containers:
+      - name: postgre
+        image: shym/postgre:latest
+        livenessProbe:
+          tcpSocket:
+            port: 5432
+        ports:
+        - containerPort: 5432
+          name: postgre
+        volumeMounts:
+          # name must match the volume name below
+        - name: postgre-persistent-storage
+          # mount path within the container
+          mountPath: /var/lib/postgre
+      volumes:
+      - name: postgre-persistent-storage
+        persistentVolumeClaim:
+          claimName: postgre-pvc
