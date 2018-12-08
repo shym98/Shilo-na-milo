@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgre-pvc
+  name: postgre-pvc-c
   annotations:
     volume.beta.kubernetes.io/storage-class: standard
 spec:

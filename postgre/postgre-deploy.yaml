@@ -35,4 +35,4 @@ spec:
       volumes:
       - name: postgre-persistent-storage
         persistentVolumeClaim:
-          claimName: postgre-pvc
+          claimName: postgre-pvc-c

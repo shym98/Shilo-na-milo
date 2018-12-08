@@ -20,15 +20,15 @@ spec:
         readinessProbe:
           httpGet:
             path: /health
-            port: 8093
+            port: 5000
           initialDelaySeconds: 120
           timeoutSeconds: 5
         livenessProbe:
           httpGet:
             path: /liveness
-            port: 8093
+            port: 5000
           initialDelaySeconds: 130
           timeoutSeconds: 10
           failureThreshold: 10
         ports:
-        - containerPort: 8093
+        - containerPort: 5000

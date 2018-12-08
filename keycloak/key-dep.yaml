@@ -17,5 +17,8 @@ spec:
       containers:
       - name: keycloak
         image: shym/keycloak:latest
+        resources:
+            requests:
+                memory: "1Gi"
         ports:
         - containerPort: 8081

@@ -5,4 +5,4 @@ metadata:
 spec:
   backend:
     serviceName: crypto
-    servicePort: 8093
+    servicePort: 5000
